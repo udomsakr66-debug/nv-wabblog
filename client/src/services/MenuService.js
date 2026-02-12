@@ -3,11 +3,11 @@ import Api from './Api'
 export default {
 
   index () {
-    return Api().get('menus')
+    return Api().get('coffees')
   },
 
   show (id) {
-    return Api().get(`menus/${id}`)
+    return Api().get(`coffee/${id}`)
   },
 
   create (menu) {
@@ -15,10 +15,10 @@ export default {
   },
 
   update (menu) {
-    return Api().put(`menus/${menu.id}`, menu)
+    return Api().put(`coffee/${menu.id}`, menu)
   },
 
   remove (menu) {
-    return Api().delete(`menus/${menu.id}`)
+    return Api().delete(`coffee/${menu.id}`)
   }
 }

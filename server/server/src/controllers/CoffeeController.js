@@ -1,8 +1,7 @@
-// src/controllers/CoffeeController.js
-const { Coffee } = require('../models') // เรียกใช้ Model Coffee ที่เราเพิ่งสร้าง
+const { Coffee } = require('../models')
 
 module.exports = {
-    // 1. ดึงเมนูทั้งหมด (GET /coffees)
+
     async index (req, res) {
         try {
             const coffees = await Coffee.findAll()
@@ -12,52 +11,50 @@ module.exports = {
         }
     },
 
-    // 2. สร้างเมนูใหม่ (POST /coffee)
     async create (req, res) {
         try {
-            // บันทึกลงตาราง Coffee
             const coffee = await Coffee.create(req.body)
-            res.send(coffee.toJSON())
+            res.send(coffee)
         } catch (err) {
             res.status(500).send({ error: 'สร้างเมนูไม่สำเร็จ' })
         }
     },
 
-    // 3. แก้ไขเมนู (PUT /coffee/:coffeeId)
     async put (req, res) {
         try {
             await Coffee.update(req.body, {
-                where: { id: req.params.coffeeId }
+                where: { id: req.params.id }
             })
-            res.send(req.body)
+            res.send({ message: 'แก้ไขสำเร็จ' })
         } catch (err) {
             res.status(500).send({ error: 'แก้ไขไม่สำเร็จ' })
         }
     },
 
-    // 4. ลบเมนู (DELETE /coffee/:coffeeId)
     async remove (req, res) {
         try {
-            const coffee = await Coffee.findOne({
-                where: { id: req.params.coffeeId }
-            })
+            const coffee = await Coffee.findByPk(req.params.id)
+
             if (!coffee) {
-                return res.status(403).send({ error: 'ไม่มีเมนูนี้' })
+                return res.status(404).send({ error: 'ไม่มีเมนูนี้' })
             }
+
             await coffee.destroy()
-            res.send(coffee)
+
+            res.send({ message: 'ลบสำเร็จ' })
         } catch (err) {
+            console.error(err)
             res.status(500).send({ error: 'ลบไม่สำเร็จ' })
         }
     },
 
-    // 5. ดูเมนูรายตัว (GET /coffee/:coffeeId)
     async show (req, res) {
         try {
-            const coffee = await Coffee.findByPk(req.params.coffeeId)
+            const coffee = await Coffee.findByPk(req.params.id)
             res.send(coffee)
         } catch (err) {
             res.status(500).send({ error: 'หาข้อมูลไม่เจอ' })
         }
     }
+
 }

@@ -16,7 +16,8 @@ require('./routes.js')(app)
 // --- Server Startup Section ---
 const port = config.port
 
-sequelize.sync({ force: false })
+// 🔥 เปลี่ยนเป็น force: true เพื่อสร้าง table ใหม่
+sequelize.sync({ force: true })
   .then(() => {
     app.listen(port, () => {
       console.log('Server running on port ' + port)

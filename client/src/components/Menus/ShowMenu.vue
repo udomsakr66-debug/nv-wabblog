@@ -6,7 +6,8 @@
       <p>MenuID: {{ menu.id }}</p>
       <p>ชื่อเมนู: {{ menu.name }}</p>
       <p>ราคา: {{ menu.price }}</p>
-      <p>รายละเอียด: {{ menu.description }}</p>
+      <p>ประเภท: {{ menu.type }}</p>
+      <p>สถานะ: {{ menu.status }}</p>
     </div>
 
     <div v-else>

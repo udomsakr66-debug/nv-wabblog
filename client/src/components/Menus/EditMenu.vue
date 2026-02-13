@@ -5,22 +5,29 @@
     <form @submit.prevent="updateMenu">
       <p>
         ชื่อเมนู:
-        <input type="text" v-model="menu.name" />
+        <input type="text" v-model="menu.name" required />
       </p>
 
       <p>
         ราคา:
-        <input type="number" v-model="menu.price" />
+        <input type="number" v-model="menu.price" required />
       </p>
 
       <p>
         ประเภท:
-        <input type="text" v-model="menu.type" />
+        <select v-model="menu.type" required>
+          <option value="ร้อน">ร้อน</option>
+          <option value="เย็น">เย็น</option>
+          <option value="ปั่น">ปั่น</option>
+        </select>
       </p>
 
       <p>
-        รายละเอียด:
-        <input type="text" v-model="menu.description" />
+        สถานะ:
+        <select v-model="menu.status" required>
+          <option value="มีจำหน่าย">มีจำหน่าย</option>
+          <option value="หมด">หมด</option>
+        </select>
       </p>
 
       <p>
@@ -36,7 +43,12 @@ import axios from 'axios'
 export default {
   data() {
     return {
-      menu: {},
+      menu: {
+        name: '',
+        price: '',
+        type: '',
+        status: ''
+      },
       menuId: null
     }
   },

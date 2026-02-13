@@ -14,8 +14,22 @@
       </p>
 
       <p>
-        รายละเอียด:
-        <input type="text" v-model="menu.description">
+        ประเภท:
+        <select v-model="menu.type" required>
+          <option disabled value="">-- เลือกประเภท --</option>
+          <option value="ร้อน">ร้อน</option>
+          <option value="เย็น">เย็น</option>
+          <option value="ปั่น">ปั่น</option>
+        </select>
+      </p>
+
+      <p>
+        สถานะ:
+        <select v-model="menu.status" required>
+          <option disabled value="">-- เลือกสถานะ --</option>
+          <option value="มีจำหน่าย">มีจำหน่าย</option>
+          <option value="หมด">หมด</option>
+        </select>
       </p>
 
       <p>
@@ -34,7 +48,8 @@ export default {
       menu: {
         name: '',
         price: '',
-        description: ''
+        type: '',
+        status: ''
       }
     }
   },

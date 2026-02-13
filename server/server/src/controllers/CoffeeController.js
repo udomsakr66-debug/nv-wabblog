@@ -7,6 +7,7 @@ module.exports = {
             const coffees = await Coffee.findAll()
             res.send(coffees)
         } catch (err) {
+            console.error("INDEX ERROR:", err)
             res.status(500).send({ error: 'ดึงข้อมูลไม่สำเร็จ' })
         }
     },

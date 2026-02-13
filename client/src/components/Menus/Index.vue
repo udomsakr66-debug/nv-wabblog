@@ -17,8 +17,15 @@
     <div v-for="menu in menus" :key="menu.id">
       <p>id: {{ menu.id }}</p>
       <p>ชื่อเมนู: {{ menu.name }}</p>
-      <p>ราคา: {{ menu.price }}</p>
-      <p>รายละเอียด: {{ menu.description }}</p>
+      <p>ราคา: {{ menu.price }} บาท</p>
+      <p>ประเภท: {{ menu.type }}</p>
+
+      <p>
+        สถานะ:
+        <span :style="{ color: menu.status === 'มีจำหน่าย' ? 'green' : 'red' }">
+          {{ menu.status }}
+        </span>
+      </p>
 
       <!-- ปุ่มเรียงแนวนอน -->
       <div class="button-row">
@@ -75,8 +82,7 @@ export default {
       try {
         if (confirm('ต้องการลบเมนูนี้หรือไม่?')) {
           await axios.delete(`http://localhost:8081/menus/${id}`)
-          const response = await axios.get('http://localhost:8081/menus')
-          this.menus = response.data
+          this.menus = this.menus.filter(menu => menu.id !== id)
         }
       } catch (error) {
         console.error(error)

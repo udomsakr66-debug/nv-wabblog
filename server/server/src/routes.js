@@ -1,5 +1,7 @@
 const CoffeeController = require('./controllers/CoffeeController')
 
+console.log(CoffeeController)
+
 module.exports = (app) => {
 
   app.get('/menus', CoffeeController.index)

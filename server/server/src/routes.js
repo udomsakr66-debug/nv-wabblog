@@ -1,24 +1,11 @@
-import Api from './Api'
+const CoffeeController = require('./controllers/CoffeeController')
 
-export default {
+module.exports = (app) => {
 
-  index () {
-    return Api().get('menus')
-  },
+  app.get('/menus', CoffeeController.index)
+  app.post('/menus', CoffeeController.create)
+  app.get('/menus/:id', CoffeeController.show)
+  app.put('/menus/:id', CoffeeController.update)
+  app.delete('/menus/:id', CoffeeController.delete)
 
-  show (id) {
-    return Api().get(`menus/${id}`)
-  },
-
-  create (menu) {
-    return Api().post('menus', menu)
-  },
-
-  update (menu) {
-    return Api().put(`menus/${menu.id}`, menu)
-  },
-
-  remove (menu) {
-    return Api().delete(`menus/${menu.id}`)
-  }
 }

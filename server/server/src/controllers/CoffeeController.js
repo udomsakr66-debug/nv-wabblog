@@ -20,7 +20,8 @@ module.exports = {
         }
     },
 
-    async put (req, res) {
+    // 🔥 เปลี่ยนจาก put → update
+    async update (req, res) {
         try {
             await Coffee.update(req.body, {
                 where: { id: req.params.id }
@@ -31,7 +32,8 @@ module.exports = {
         }
     },
 
-    async remove (req, res) {
+    // 🔥 เปลี่ยนจาก remove → delete
+    async delete (req, res) {
         try {
             const coffee = await Coffee.findByPk(req.params.id)
 
@@ -40,8 +42,8 @@ module.exports = {
             }
 
             await coffee.destroy()
-
             res.send({ message: 'ลบสำเร็จ' })
+
         } catch (err) {
             console.error(err)
             res.status(500).send({ error: 'ลบไม่สำเร็จ' })
